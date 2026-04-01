@@ -7,6 +7,11 @@ CREATE TABLE customers (
     PRIMARY KEY (customer_name)
 );
 
+CREATE TABLE products (
+    product_name VARCHAR(100) NOT NULL,
+    PRIMARY KEY (product_name)
+);
+
 CREATE TABLE orders (
     order_id INT NOT NULL,
     order_date DATE NOT NULL,
@@ -28,5 +33,10 @@ CREATE TABLE order_items (
         FOREIGN KEY (order_id)
         REFERENCES orders(order_id)
         ON UPDATE CASCADE
-        ON DELETE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT fk_order_items_products
+        FOREIGN KEY (product_name)
+        REFERENCES products(product_name)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
 );
